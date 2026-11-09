@@ -43,7 +43,7 @@ internal class Goal {
             var _ = Task.Run(() => {
                 try {
                     var checkLocationTask = Task.Run(() => ConnectionAndPopups.APSession!.SetGoalAchieved());
-                    if (!checkLocationTask.Wait(TimeSpan.FromSeconds(2))) {
+                    if (!checkLocationTask.Wait(TimeSpan.FromSeconds(5))) {
                         var msg = $"AP server timed out when we tried to tell it that you've achieved your goal. Did the connection go down?";
                         Log.Warning(msg);
                         InGameConsole.Add($"<color=orange>{msg}</color>");

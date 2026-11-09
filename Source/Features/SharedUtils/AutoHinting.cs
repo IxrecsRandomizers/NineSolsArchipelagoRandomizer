@@ -47,7 +47,7 @@ internal class AutoHinting {
             var _ = Task.Run(() => {
                 Log.Info($"AutoHinting::Update() subtask asking the AP server to generate {locationIds.Length} hint(s).");
                 var hintTask = Task.Run(() => ConnectionAndPopups.APSession.Hints.CreateHints(locationIds: locationIds));
-                if (!hintTask.Wait(TimeSpan.FromSeconds(2))) {
+                if (!hintTask.Wait(TimeSpan.FromSeconds(5))) {
                     InGameConsole.Add($"<color=orange>AP server timed out when we tried to generate {locationIds.Length} hint(s). Did the connection go down?</color>");
                 }
                 foreach (var flag in hintFlags)

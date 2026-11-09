@@ -219,7 +219,7 @@ internal class InGameConsole {
         // block whatever we (and the vanilla game) were doing on waiting for the AP server response
         var _ = Task.Run(() => {
             var sayPacketTask = Task.Run(() => ConnectionAndPopups.APSession.Say(text));
-            if (!sayPacketTask.Wait(TimeSpan.FromSeconds(2))) {
+            if (!sayPacketTask.Wait(TimeSpan.FromSeconds(5))) {
                 Add($"<color=orange>AP server timed out when we tried to send the message '{text}'. Did the connection go down?</color>");
             }
             ConsoleInput = ""; // only clear the entry if we've executed the command successfully

@@ -63,7 +63,7 @@ namespace ArchipelagoRandomizer.Locations {
                 APSaveManager.WriteCurrentSaveFile();
                 Log.Info($"added {result.Count} location scouts to save data, for a new total of {scoutedLocations.Count}");
             }));
-            if (!scoutTask.Wait(TimeSpan.FromSeconds(5))) {
+            if (!scoutTask.Wait(TimeSpan.FromSeconds(10))) {
                 Log.Error("Scouting timed out!");
             }
         }
