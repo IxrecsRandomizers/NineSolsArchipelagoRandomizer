@@ -281,6 +281,8 @@ internal class ConnectionAndPopups {
         ShopRando.ApplySlotData(randomizeShops);
         long? randomizeSkillTree = SlotData.TryGetValue("randomize_skill_tree", out var rst) ? (long)rst : null;
         SkillTree.ApplySlotData(logicDifficulty, randomizeSkillTree);
+        object? erPairings = SlotData.TryGetValue("er_pairings", out var ep) ? ep : null;
+        ERMain.ApplySlotData(erPairings);
         if (SlotData.ContainsKey("apworld_version")) {
             WorldVersion = Version.Parse((string)SlotData["apworld_version"]);
             var modVersion = new Version(0, 6, 5); // must match thunderstore.toml version, or these warnings become incorrect
