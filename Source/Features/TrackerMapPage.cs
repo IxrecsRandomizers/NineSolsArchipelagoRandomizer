@@ -32,7 +32,6 @@ class TrackerMapPage {
         { "A10_S4", "grotto_of_scriptures_west" },
         { "A4_S2", "inner_warehouse" },
         { "A3_S1", "lake_yaochi_ruins" },
-        { "P2_R22_Savepoint_GameLevel", "nobility_hall" },
         { "A4_S1", "outer_warehouse" },
         { "A2_S1", "power_reservoir_central" },
         { "A2_S2", "power_reservoir_east" },
@@ -75,7 +74,18 @@ class TrackerMapPage {
     private static void GameLevel_Awake(GameLevel __instance) {
         try {
             var levelName = __instance.name;
-            if (GameLevelToTrackerPage.TryGetValue(levelName, out var trackerPageName)) {
+            // Unfortunately multiple levels share this name, so we need to special case it
+            if (levelName == "P2_R22_Savepoint_GameLevel") {
+                var sceneName = __instance.SceneName;
+                if (sceneName == "A7_S5_Boss_ButterFly") {
+                    ChangeTrackerMapPage("cortex_center");
+                } else if (sceneName == "A9_S5_風氏") {
+                    ChangeTrackerMapPage("nobility_hall");
+                } else {
+                    Log.Info($"TrackerMapPage::GameLevel_Awake called in P2_R22_Savepoint_GameLevel with unknown sceneName = {sceneName}");
+                }
+            // All the "normal" unique level names can be handled by a static dictionary lookup
+            } else if (GameLevelToTrackerPage.TryGetValue(levelName, out var trackerPageName)) {
                 ChangeTrackerMapPage(trackerPageName);
             } else {
                 Log.Info($"TrackerMapPage::GameLevel_Awake called with unknown levelName = {levelName}");
