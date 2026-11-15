@@ -165,9 +165,13 @@ namespace ArchipelagoRandomizer.Features.EntranceRando;
 
 [HarmonyPatch]
 internal class EntranceMapping {
-    public static Dictionary<Portal, Portal> EntranceMap = new Dictionary<Portal, Portal> {
-        // hardcode test mappings here
+    public static Dictionary<Portal, Portal> TestEntranceMap = new Dictionary<Portal, Portal> {
+        // hardcode test mappings here before using the debug tools to apply them
+        { Portal.FGH_BOTTOM_LEFT_ELEVATOR, Portal.FPA_BOTTOM_RIGHT_ELEVATOR },
+        { Portal.FPA_BOTTOM_RIGHT_ELEVATOR, Portal.FGH_RIGHT_PORTAL },
     };
+
+    public static Dictionary<Portal, Portal> EntranceMap = new Dictionary<Portal, Portal> {};
 
     [HarmonyPrefix, HarmonyPatch(typeof(SceneConnectionPoint), "Awake")]
     static void SceneConnectionPoint_Awake(SceneConnectionPoint __instance) {

@@ -146,11 +146,14 @@ class DebugTools {
             if (GUILayout.Button("Toggle Entrance Mapping", buttonStyle)) {
                 ERMain.ToggleMapping();
             }
-            if (GUILayout.Button("Create Circular Mapping", buttonStyle)) {
-                ERMain.CreateCircularMapping();
+            if (GUILayout.Button("Apply Test Mapping", buttonStyle)) {
+                ERMain.ApplyTestMapping();
             }
-            if (GUILayout.Button("Create Random Mapping", buttonStyle)) {
-                ERMain.CreateRandomMapping();
+            if (GUILayout.Button("Circular Mapping", buttonStyle)) {
+                ERMain.CreateCircularTestMapping();
+            }
+            if (GUILayout.Button("Random Mapping", buttonStyle)) {
+                ERMain.CreateRandomTestMapping();
             }
             GUILayout.EndHorizontal();
 

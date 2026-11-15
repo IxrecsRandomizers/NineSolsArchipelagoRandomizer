@@ -17,22 +17,29 @@ internal class ERMain {
         ToastManager.Toast($"Set entranceMappingActive to {entranceMappingActive}. EntranceMap currently contains {EntranceMap.Count} mappings.");
     }
 
-    static public void CreateCircularMapping() {
-        EntranceMap.Clear();
+    static public void ApplyTestMapping() {
+        ToastManager.Toast($"Swapping current EntranceMap ({EntranceMap.Count} mappings) with the test map ({TestEntranceMap.Count} mappings).");
+        var oldMapping = EntranceMap;
+        EntranceMap = TestEntranceMap;
+        TestEntranceMap = oldMapping;
+    }
+
+    static public void CreateCircularTestMapping() {
+        TestEntranceMap.Clear();
         var portals = Enum.GetValues(typeof(Portal)).Cast<Portal>().ToArray();
         var previousPortal = portals.Last();
         foreach (var portal in portals) {
             if (DepartureOnlyPortals.Contains(portal) || ArrivalOnlyPortals.Contains(portal))
                 continue;
             Log.Warning($"mapping {previousPortal} to {portal}");
-            EntranceMap.Add(previousPortal, portal);
+            TestEntranceMap.Add(previousPortal, portal);
             previousPortal = portal;
         }
-        ToastManager.Toast($"rewrote EntranceMap: all two-way portals are now linked in a circle");
+        ToastManager.Toast($"Rewrote test map: all two-way portals are now linked in a circle.\nRemember it won't do anything until you click 'Apply Test Mapping'.");
     }
 
-    static public void CreateRandomMapping() {
-        EntranceMap.Clear();
+    static public void CreateRandomTestMapping() {
+        TestEntranceMap.Clear();
         var portals = Enum.GetValues(typeof(Portal)).Cast<Portal>().ToArray();
 
         var unmappedDepartures = new List<Portal>();
@@ -57,10 +64,10 @@ internal class ERMain {
             unmappedArrivals.RemoveAt(i);
 
             Log.Warning($"mapping {departure} to {arrival}");
-            EntranceMap.Add(departure, arrival);
+            TestEntranceMap.Add(departure, arrival);
         }
 
-        ToastManager.Toast($"rewrote EntranceMap: all portals are now randomly linked");
+        ToastManager.Toast($"Rewrote test map: all portals are now randomly linked.\nRemember it won't do anything until you click 'Apply Test Mapping'.");
     }
 
     static public void ApplySlotData(object? erPairings) {
