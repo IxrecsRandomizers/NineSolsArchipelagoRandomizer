@@ -428,6 +428,27 @@ Nine Sols:
     'false': 50
     'true': 0
 
+  randomize_entrances:
+    # Entrance randomization makes many of the doors, transporters, crates, elevators, etc. Yi uses to
+    # travel around New Kunlun go somewhere else instead. For example, walking out the right exit of
+    # Cortex Center might spawn you inside the crates headed to Inner Warehouse.
+    # 
+    # This option currently randomizes 51 two-way connections and 4 one-way connections. Many other connections
+    # are intentionally left unrandomized, such as the Central Hall doors to FSP and Control Hub/Eigong,
+    # the Jiequan 1 fight into Prison, Lady E's soulscape entrance, the connections between each part of
+    # Peach Blossom Village, and the doors into various "puzzle rooms" and "enemy gauntlet rooms".
+    'false': 50
+    'true': 0
+
+  coupled_entrances:
+    # In "coupled" ER, every A->B connection has a B->A connection as well. In other words, if you go into
+    # door A and come out of door B, going back into door B will take you back to door A.
+    # Highly recommended for your first time doing ER. Uncoupled ER is much less intuitive.
+    # 
+    # Has no effect if randomize_entrances is False.
+    'false': 0
+    'true': 50
+
   # Item Name Groups provided by Nine Sols
 
   # "progression"
