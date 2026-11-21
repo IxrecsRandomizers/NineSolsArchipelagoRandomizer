@@ -237,6 +237,24 @@ internal class EntranceMapping {
             var wosDoorOpened = (ScriptableDataBool)SingletonBehaviour<SaveManager>.Instance.allFlags.FlagDict["0ea80768ba7f9b849a697d39298c02acScriptableDataBool"];
             wosDoorOpened.CurrentValue = true;
             ToastManager.Toast("opening the bottom right door in Yinglong Canal");
+        // These elevators don't cause any obvious problems on arrival, but if you hack the hack point next to them after arriving at them via ER,
+        // then reload the room, they end up softlocked in a state where the elevator is locked and the hack point unhackable at the same time.
+        } else if (arrivalPortal == Portal.FPA_BOTTOM_RIGHT_ELEVATOR) {
+            var fpaBottomRightLiftUnlocked = (ScriptableDataBool)SingletonBehaviour<SaveManager>.Instance.allFlags.FlagDict["0c41ec7c9f57e7d4da7fe209ae1aa8c4ScriptableDataBool"];
+            fpaBottomRightLiftUnlocked.CurrentValue = true;
+            ToastManager.Toast("unlocking the bottom right elevator in Factory (PA)");
+        } else if (arrivalPortal == Portal.FPA_TOP_ELEVATOR) {
+            var fpaTopLiftUnlocked = (ScriptableDataBool)SingletonBehaviour<SaveManager>.Instance.allFlags.FlagDict["897a7ea1135748b41abde02419a97dccScriptableDataBool"];
+            fpaTopLiftUnlocked.CurrentValue = true;
+            ToastManager.Toast("unlocking the top elevator in Factory (PA)");
+        } else if (arrivalPortal == Portal.FGH_TOP_LEFT_ELEVATOR) {
+            var fghTopLeftLiftUnlocked = (ScriptableDataBool)SingletonBehaviour<SaveManager>.Instance.allFlags.FlagDict["772aa4893a7f56b4687be4744c1b56c3ScriptableDataBool"];
+            fghTopLeftLiftUnlocked.CurrentValue = true;
+            ToastManager.Toast("unlocking the top left elevator in Factory (GH)");
+        } else if (arrivalPortal == Portal.PRISON_ELEVATOR) {
+            var prisonLiftUnlocked = (ScriptableDataBool)SingletonBehaviour<SaveManager>.Instance.allFlags.FlagDict["97c8e7012e6c3e3409ef888814344827ScriptableDataBool"];
+            prisonLiftUnlocked.CurrentValue = true;
+            ToastManager.Toast("unlocking the Prison elevator");
         }
     }
 
