@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using Archipelago.MultiClient.Net.Models;
+using HarmonyLib;
+using Newtonsoft.Json.Linq;
 using NineSolsAPI;
 using System.Collections.Generic;
 using static ArchipelagoRandomizer.Features.EntranceRando.PortalData;
@@ -220,6 +222,16 @@ internal class EntranceMapping {
         var halfEditedIds = new DepartureIds(ids.levelName, ids.sceneName, arrivalIds.connectionName);
         HalfEditedDepartures[halfEditedIds] = departurePortal;
         //Log.Warning($"editing {departurePortal} to connect to {arrivalPortal} part 1.5: mapped halfEditedIds to {departurePortal}");
+
+        // data storage update for UT entrance tracking
+        var session = ConnectionAndPopups.APSession;
+        if (session != null) {
+            var dsKey = $"{session.ConnectionInfo.Slot}_{session.ConnectionInfo.Team}_nine_sols_found_entrances";
+            session.DataStorage[dsKey].Initialize(JObject.FromObject(new Dictionary<string, bool>()));
+            session.DataStorage[dsKey] += Operation.Update(new Dictionary<string, bool> {
+                { departurePortal.ToString(), true }
+            });
+        }
 
         if (arrivalPortal == Portal.EDP_TOP_ELEVATOR) {
             var pinkWaterfallDisabled = (ScriptableDataBool)SingletonBehaviour<SaveManager>.Instance.allFlags.FlagDict["a2dba9e5-61cf-453a-8981-efb081fb0b11_4256ef2ec22f942dc9f70607bb00391fScriptableDataBool"];
