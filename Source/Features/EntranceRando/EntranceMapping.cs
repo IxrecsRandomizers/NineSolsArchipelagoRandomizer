@@ -248,7 +248,9 @@ internal class EntranceMapping {
         } else if (arrivalPortal == Portal.YC_RIGHT_PORTAL) {
             var wosDoorOpened = (ScriptableDataBool)SingletonBehaviour<SaveManager>.Instance.allFlags.FlagDict["0ea80768ba7f9b849a697d39298c02acScriptableDataBool"];
             wosDoorOpened.CurrentValue = true;
-            ToastManager.Toast("opening the bottom right door in Yinglong Canal");
+            var greenhouse2ndWaterfallHacked = (ScriptableDataBool)SingletonBehaviour<SaveManager>.Instance.allFlags.FlagDict["33f2048d9d48dc14c864ac842896af82ScriptableDataBool"];
+            greenhouse2ndWaterfallHacked.CurrentValue = true;
+            ToastManager.Toast("opening the bottom right door in Yinglong Canal and pre-hacking the 2nd Greenhouse waterfall");
         // These elevators don't cause any obvious problems on arrival, but if you hack the hack point next to them after arriving at them via ER,
         // then reload the room, they end up softlocked in a state where the elevator is locked and the hack point unhackable at the same time.
         } else if (arrivalPortal == Portal.FPA_BOTTOM_RIGHT_ELEVATOR) {
